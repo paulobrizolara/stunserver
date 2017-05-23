@@ -1,0 +1,11 @@
+
+def build(ctx):
+    ctx.program(
+        target="stuntestcode",
+        source=ctx.glob("*.cpp"),
+        includes=['.'],
+        export_includes=['.'],
+
+        ldflags = ["-pthread"],
+        use=["common", "stuncore", "networkutils"] + ctx.env.conan_dependencies
+    )

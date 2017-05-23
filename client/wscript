@@ -1,0 +1,11 @@
+from os import path
+
+def build(ctx):
+    ctx.program(
+        target="stunclient",
+        source=ctx.glob("*.cpp"),
+        includes=['.', path.join("..", "resources")],
+        export_includes=['.'],
+
+        use=["common", "stuncore", "networkutils"] + ctx.env.conan_dependencies
+    )

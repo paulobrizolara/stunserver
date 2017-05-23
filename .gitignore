@@ -13,3 +13,13 @@ stunclient.exe
 stunserver.exe
 stuntestcode.exe
 
+# Waf
+build/
+.lock-waf*
+.waf-*
+*.pyc
+
+# Conan
+conanbuildinfo_waf.py
+conaninfo.txt
+conan_imports_manifest.txt

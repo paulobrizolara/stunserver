@@ -1,0 +1,10 @@
+
+def build(ctx):
+    ctx.objects(
+        target="stuncore",
+        source=ctx.glob("*.cpp"),
+        includes=['.'],
+        export_includes=['.'],
+
+        use=["common"]
+    )

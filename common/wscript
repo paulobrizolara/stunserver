@@ -1,0 +1,9 @@
+
+def build(ctx):
+    #TODO: support a precompiled header
+    ctx.objects(
+        target="common",
+        source=ctx.glob("*.cpp"),
+        includes=['.'],
+        export_includes=['.']
+    )
