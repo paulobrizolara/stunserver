@@ -5,7 +5,15 @@ def build(ctx):
         target="stuntman",
         source=ctx.glob("*.cpp", excl=["main.cpp"]),
         includes=['.'],
-        export_includes=['.'],
+        export_includes=[
+            '.',
+            path.join("..", "common"),
+            path.join("..", "networkutils"),
+            path.join("..", "stuncore")
+        ],
+
+        install_includedir = path.join(ctx.env.INCLUDEDIR, "stuntman"),
+        install_relative   = False,
 
         use=["common", "stuncore", "networkutils"] + ctx.env.conan_dependencies
     )

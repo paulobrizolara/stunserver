@@ -7,6 +7,7 @@ from waflib.Configure import conf
 
 def load_tools(ctx):
     ctx.load('compiler_cxx')
+    ctx.load('gnu_dirs')
 
 def options(ctx):
     load_tools(ctx)
@@ -88,6 +89,8 @@ def setup_variant(variant_name):
 
 @conf
 def lib(bld, *k, **kw):
+    from waflib import Utils
+
     if 'install_path' not in kw:
         kw['install_path'] = bld.env.LIBDIR
 
@@ -97,10 +100,26 @@ def lib(bld, *k, **kw):
         bld.stlib(*k, **kw)
 
     includedir = kw.get('install_includedir', bld.env.INCLUDEDIR)
-    install_headers = kw.get('install_headers', None)
+
+    install_headers = []
+
+    if 'install_headers' in kw:
+        install_headers = kw['install_headers']
+    elif 'export_includes' in kw:
+
+        for inc_dir in kw.get('export_includes'):
+
+            inc_node = bld.path.make_node(inc_dir)
+            incs = inc_node.ant_glob([
+                                path.join('**', '*.h'),
+                                path.join('**', '*.hpp')])
+
+            install_headers.extend(incs)
 
     if install_headers:
-        bld.install_files(includedir, Utils.to_list(install_headers), relative_trick=True)
+        headers_base = kw.get("headers_base", None)
+        relative_trick = kw.get("install_relative", True)
+        bld.install_files(includedir, Utils.to_list(install_headers), relative_trick=relative_trick, cwd=headers_base)
 
 @conf
 def get_env(ctx, opt, default=None):
