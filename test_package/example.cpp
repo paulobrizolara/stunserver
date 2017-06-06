@@ -36,7 +36,7 @@ int main(){
 
     CStunServerConfig config;
 
-    config.addrPP = CSocketAddress(0, DEFAULT_STUN_PORT);
+    config.addrPP = CSocketAddress(0, 0);
     config.fHasPP = true;
 
     UdpServerPtr udpServer;
@@ -45,7 +45,10 @@ int main(){
 
     if(FAILED(StartUDP(udpServer, config))){
         std::cerr << "failed" << std::endl;
+        return 1;
     }
+
+    std::cout << "listening at port: " << udpServer->getSocket(RolePP).GetLocalAddress().GetPort() << std::endl;
 
     std::cout << "stopping udp server " << std::endl;
 

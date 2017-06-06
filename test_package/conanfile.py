@@ -7,7 +7,7 @@ import os
 from os import path
 
 package_name = "stuntman"
-version      = "1.2.13"
+version      = "1.2.13.1"
 username     = os.getenv("CONAN_USERNAME", "notfound")
 channel      = os.getenv("CONAN_CHANNEL", "testing")
 

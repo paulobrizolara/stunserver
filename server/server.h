@@ -83,6 +83,10 @@ public:
     HRESULT Start();
     HRESULT Stop();
 
+    const
+    CStunSocket & getSocket(SocketRole role) const;
+    CStunSocket & getSocket(SocketRole role);
+
     ADDREF_AND_RELEASE_IMPL();
 };
 

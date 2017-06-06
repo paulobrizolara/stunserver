@@ -51,6 +51,16 @@ CStunServer::~CStunServer()
     Shutdown();
 }
 
+
+const CStunSocket &CStunServer::getSocket(SocketRole role) const{
+    return this->_arrSockets[role];
+}
+
+CStunSocket &CStunServer::getSocket(SocketRole role){
+    return this->_arrSockets[role];
+}
+
+
 HRESULT CStunServer::AddSocket(TransportAddressSet* pTSA, SocketRole role, const CSocketAddress& addrListen, const CSocketAddress& addrAdvertise, bool fSetReuseFlag)
 {
     HRESULT hr = S_OK;
@@ -283,7 +293,6 @@ HRESULT CStunServer::Stop()
 
     return S_OK;
 }
-
 
 
 

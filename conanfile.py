@@ -8,7 +8,7 @@ from os import path
 
 class Recipe(ConanFile):
     name        = "stuntman"
-    version     = "1.2.13"
+    version     = "1.2.13.1"
     description = "STUN server and client code by john selbie"
     license     = "Apache 2.0"
     url         = "https://github.com/jselbie/stunserver"
@@ -36,7 +36,7 @@ class Recipe(ConanFile):
         "testcode/**"
     )
     options = {
-        "shared"            : [True, False],
+        "shared"            : [True, False]
     }
     default_options     = (
         'shared=False',
